@@ -31,22 +31,31 @@
 /** CUSTOM STYLES
 ======================================*/
 
-.form, #bx-pager {
-	width: 80%;
+.form{
+	width:80%;
 	margin: auto;
+	
 }
 
-#bx-pager a {
-	width: 21%;
+#bx-pager{
+	text-align:center;
+	width:80%;
+	margin: auto;
+	border-bottom: 1px dotted #00458c;
+	padding-bottom: 10px;
 }
+
 
 #bx-pager a, #bx-pager input.submit{
 	margin: 1%;
-	background: #CCC;
+	background: #fff6af;
 	text-align: center;
 	text-decoration: none;
+	font-size: small;
+	font-weight: bold;
 	padding: 1%;
 	border-radius: 25px;
+	border: 1px solid #00458c;
 }
 
  #bx-pager input.submit {
@@ -55,20 +64,25 @@
 	 width: 15%;
  }
 
-#bx-pager a.active {
-	background: yellow;
+#bx-pager a.active, #bx-pager a.hover {
+	background-color: #00458c;
+	color: #ffdd00;
+}
+
+#bx-pager img {
+	vertical-align: middle;
+	margin-bottom: 5px;
 }
 
 /** THEME
 ===================================*/
 
 .bx-wrapper .bx-viewport {
-	-moz-box-shadow: 0 0 5px #ccc;
-	-webkit-box-shadow: 0 0 5px #ccc;
-	box-shadow: 0 0 5px #ccc;
-	border: solid #fff 5px;
 	left: -5px;
 	background: #fff;
+	margin-top: 15px;
+	height: 100% !important;
+	
 }
 
 .bx-wrapper .bx-pager,
@@ -149,8 +163,7 @@
 
 .bx-wrapper .bx-controls-direction a {
 	position: absolute;
-	top: 50%;
-	margin-top: -16px;
+	top: 1%;
 	outline: 0;
 	width: 32px;
 	height: 32px;

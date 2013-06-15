@@ -63,7 +63,11 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
             $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
             $this->_helper->_redirector->gotoRoute(array('action' => 'thankyou'), $route);
                         
-        } else {
+        } 
+	
+		
+		
+		else {
 
             $typeId = null;
             if (isset($_POST['contribution_type']) && ($postedType = $_POST['contribution_type'])) {
@@ -300,7 +304,7 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
      */
     protected function _validateContribution($post)
     {
-        if (!@$post['terms-agree']) {
+        if (!$post['terms-agree']) {
             $this->_helper->flashMessenger(__('You must agree to the Terms and Conditions.'), 'error');
             return false;
         }

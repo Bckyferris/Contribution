@@ -1,4 +1,55 @@
 
+
+#type-form {
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border: solid #fff 5px;
+}
+
+.contributionTypeTabs a.selected {
+	background-color: #00458c;
+	color: #ffdd00;
+}
+
+.contributionTypeTabs {
+	margin-left: 0;
+	margin-top: 10px;
+	font-size: large;
+	padding: 5px;
+	list-style-type: none;
+	text-align: center;	
+
+}
+
+.contributionTypeTabs li{
+	display: inline;
+	margin: 0;
+		
+}
+
+.contributionTypeTabs a{
+	text-decoration: none;
+	padding: 3px 7px;
+	margin-right: 3px;
+	border: 1px solid #ffae00;
+	background-color: #fff6af;
+	color: #2d2b2b;	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.contributionTypeTabs a:hover{
+	background-color: #00458c;
+	color: #ffdd00;
+}
+
+
+#term-warning{
+	color:red;
+}
+
 div#contribution-type-form div.inputs {
 	width: 60%;
 	
@@ -6,6 +57,11 @@ div#contribution-type-form div.inputs {
 
 div#location_form {
 	margin-top: 12px;
+}
+
+#contribution-confirm-submit p{
+	font-size: 1em;
+	margin: 10px 0px 0px 0px;
 }
 
 /* User Profiles integration */

@@ -105,7 +105,9 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
         $this->_createDefaultContributionTypes();
-        set_option('contribution_email_recipients', get_option('administrator_email'));        
+        set_option('contribution_email_recipients', get_option('administrator_email')); 
+		
+		$this->_addContributorElementSet();       
     }
 
     /**
@@ -463,6 +465,52 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
           }          
       }
     }  
+	
+	
+	/**
+     * Create a new element set for contributor information.
+     */
+    private function __addContributorElementSet(){
+		$elementSetTable = $this->_db->getTable('ElementSet');
+		$contributorInformation = new ElementSet;
+		$contributorInformation->record_type = 'Item';
+		$contributorInformation->name = 'Contributor Information';
+		$contributorInformation->description = 'Personal information that relates to the contributor of an item';
+		
+		$elementTable = $this->_db->getTable('Element');
+		$contributorLocation = new Element;
+		$contributorLocation->name = 'Contributor Location';
+		$contributorLocation->description = 'Zip code of the contributor of an item';
+		$contributorLocation->element_set_id = $contributorInformation->id;
+		
+		$contributorName = new Element;
+		$contributorName->name = 'Contributor Name';
+		$contributorName->description = 'Name of the contributor of an item';
+		$contributorName->element_set_id = $contributorInformation->id;
+		
+		$contributorAge = new Element;
+		$contributorAge->name = 'Contributor Age';
+		$contributorAge->description = 'Age of the contributor of an item';
+		$contributorAge->element_set_id = $contributorInformation->id;
+		
+		$contributorEthnicity = new Element;
+		$contributorEthnicity->name = 'Contributor Ethnicity';
+		$contributorEthnicity->description = 'Ethnicity or race of the contributor of an item';
+		$contributorEthnicity->element_set_id = $contributorInformation->id;
+		
+		$contributorGender = new Element;
+		$contributorGender->name = 'Contributor Gender';
+		$contributorGender->description = 'Gender of the contributor of an item';
+		$contributorGender->element_set_id = $contributorInformation->id;
+		
+		$contributorTwitter = new Element;
+		$contributorTwitter->name = 'Contributor Twitter Handle';
+		$contributorTwitter->description = 'Twitter Handle of the contributor of an item';
+		$contributorTwitter->element_set_id = $contributorInformation->id;
+		
+		
+		
+	}
 
     public function hookAfterDeleteItem($args)
     {

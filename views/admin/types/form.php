@@ -117,6 +117,7 @@
             <?php if($contribution_type->exists()): ?>
             <?php echo link_to($contribution_type, 'delete-confirm', 'Delete', array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
+            
     </div>
 </section>
 </form>

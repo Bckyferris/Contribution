@@ -8,18 +8,29 @@ function toggleProfileEdit() {
 function enableContributionTypeButtons(url) {
     var typeButtons = jQuery('a.type-option');
     var typeFormDiv = jQuery('div#type-form');
+
     
     typeButtons.click(function(e) {
         e.preventDefault();
         var el = jQuery(this);
+		
+		$("a").removeClass("selected");
+		el.addClass("selected");
+		
+		typeButtons.fadeTo("fast", 0.4);
+		el.fadeTo("fast", 1.0);
+			
         var typeId = el.attr('value');
         typeFormDiv.empty();
+		
         jQuery.post(url, {contribution_type: typeId}, function(data) {
             typeFormDiv.append(data);
+			
+		
+		
         });
     });
 }
-
 
 function enableContributionAjaxForm(url) {
     jQuery(document).ready(function() {
