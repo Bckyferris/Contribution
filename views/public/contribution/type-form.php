@@ -90,10 +90,10 @@ foreach ($type->getTypeElements() as $contributionTypeElement) {
                 </li>
                 
                  <li>
-                    <div class="form" >
+                    <div class="form">
                         <h2>When</h2>
                        <!-- figure out how the calendar will work :) , and do the same thing! -->
-                       
+                        <?php echo get_specific_plugin_hook_output('Calendar', 'contribution_type_form', array('view' => $this, 'item' => $item, 'type'=>$type) ); ?>
                    </div>
 
                 </li>
@@ -102,6 +102,11 @@ foreach ($type->getTypeElements() as $contributionTypeElement) {
                 <li>
                     <div class="form">
                         <h2>About You</h2>
+                        <div class="inputs">
+                                <?php $anonymous = isset($_POST['contribution-anonymous']) ? $_POST['contribution-anonymous'] : 0; ?>
+                                <?php echo $this->formCheckbox('contribution-anonymous', $anonymous, null, array(1, 0)); ?>
+                                <?php echo $this->formLabel('contribution-anonymous', "Contribute anonymously."); ?>
+                            </div>
                         <?php echo $profileForm ?>
                     </div>
                 </li>
@@ -116,15 +121,11 @@ foreach ($type->getTypeElements() as $contributionTypeElement) {
                             </div>
                         <?php endif; ?>
                             <div class="inputs">
-                                <?php $public = isset($_POST['contribution-public']) ? $_POST['contribution-public'] : 0; ?>
+                                <?php $public = isset($_POST['contribution-public']) ? $_POST['contribution-public'] : 1; ?>
                                 <?php echo $this->formCheckbox('contribution-public', $public, null, array('1', '0')); ?>
-                                <?php echo $this->formLabel('contribution-public', 'Publish my contribution on the web.'); ?>
+                                <?php echo $this->formLabel('contribution-public', 'Share my contribution publicly. Uncheck to share only with approved researchers.'); ?>
                             </div>
-                            <div class="inputs">
-                                <?php $anonymous = isset($_POST['contribution-anonymous']) ? $_POST['contribution-anonymous'] : 0; ?>
-                                <?php echo $this->formCheckbox('contribution-anonymous', $anonymous, null, array(1, 0)); ?>
-                                <?php echo $this->formLabel('contribution-anonymous', "Contribute anonymously."); ?>
-                            </div>
+                            
                             <p>In order to contribute, you must read and agree to the <a href="<?php echo contribution_contribute_url('terms') ?>" target="_blank">Terms and Conditions.</a></p>
                             <div class="inputs" id="terms">
                                 <?php $agree = isset( $_POST['terms-agree']) ?  $_POST['terms-agree'] : 0 ?>
