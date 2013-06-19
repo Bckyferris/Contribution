@@ -19,7 +19,16 @@
                         'sort' => 'alpha',
                     )
                 );
+				
+		$contributorElements = get_table_options(
+				'Element', null,
+				array(
+					'element_set_name' => 'Contributor Information',
+					'sort' => 'alpha',
+				)
+			);
         $elementsArray['Dublin Core'] = $dcElements['Dublin Core'];
+		$elementsArray['Contributor Info'] = $contributorElements['Contributor Information'];
         
         echo $this->formSelect(
             $element_id_name, $element_id_value,
