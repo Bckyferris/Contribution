@@ -20,15 +20,23 @@
                     )
                 );
 				
-		$contributorElements = get_table_options(
+		$contributorSet = get_db()->getTable('ElementSet')->findByName('Contributor Information');		
+		if($contributorSet)
+		{
+			
+			$contributorElements = get_table_options(
 				'Element', null,
 				array(
 					'element_set_name' => 'Contributor Information',
 					'sort' => 'alpha',
 				)
 			);
+			
+			$elementsArray['Contributor Info'] = $contributorElements['Contributor Information'];
+		}
+		
         $elementsArray['Dublin Core'] = $dcElements['Dublin Core'];
-		$elementsArray['Contributor Info'] = $contributorElements['Contributor Information'];
+		
         
         echo $this->formSelect(
             $element_id_name, $element_id_value,

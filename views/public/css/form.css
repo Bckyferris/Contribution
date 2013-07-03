@@ -1,53 +1,98 @@
-
-
-#type-form {
-	-moz-box-shadow: 0 0 5px #ccc;
-	-webkit-box-shadow: 0 0 5px #ccc;
-	box-shadow: 0 0 5px #ccc;
-	border: solid #fff 5px;
+#acceptedTypes {
+	width: 70%;
+	margin: auto;	
 }
 
-.contributionTypeTabs a.selected {
-	background-color: #00458c;
-	color: #ffdd00;
+
+#termsDiv{
+	display: none;
+	border: 1px solid;
+	padding: 10px;
+	line-height: 1em;
+	font-size: small;
 }
 
-.contributionTypeTabs {
-	margin-left: 0;
-	margin-top: 10px;
-	font-size: large;
-	padding: 5px;
+#termsDiv h2{
+	text-align: center;
+}
+
+#termsDiv li, #termsDiv p{
+	font-size: small;
+}
+
+#termsLink {
+	font-size: medium;
+}
+
+/*Fixes float on "Contribute anonymously checkbox */
+.form div.inputs label{
+	width: auto;
+	float:none;
+}
+
+/* Hides "Select One" in the options array for Type Buttons */
+.contributionTypeTab:first-child{
+	display: none;
+}
+
+
+/*Styles for Item-type list and the contribution breadcrumbs*/
+.contributionTypeTabs, .form-headings{
+	margin: 20px;
+	padding: 0;
 	list-style-type: none;
-	text-align: center;	
+	text-align: center;
+	
+}
 
+.form-headings{
+	border-top: 1px dotted #00458c;
+	border-bottom: 1px dotted #00458c;
 }
 
 .contributionTypeTabs li{
-	display: inline;
-	margin: 0;
-		
+	display: inline-block;
+	font-size: 12pt;
+	
 }
 
-.contributionTypeTabs a{
+.form-headings li {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 15px;
+	margin-bottom: 3px;
+	font-size: 9pt;
+}
+
+.form-headings li.arrow {
+	margin-top: 13px;
+}
+
+.contributionTypeTabs a, .form-headings a{
 	text-decoration: none;
-	padding: 3px 7px;
-	margin-right: 3px;
-	border: 1px solid #ffae00;
-	background-color: #fff6af;
-	color: #2d2b2b;	
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	padding: 10px;
+	margin: 2px;
+	font-weight: bold;
+	background-color:#ffdd00;
+	-moz-border-radius:14px;
+	-webkit-border-radius:14px;
+	border-radius:14px;
+	border:1px solid #ffae00;
+	color:#00468c;
 }
 
-.contributionTypeTabs a:hover{
+.contributionTypeTabs a:hover, .form-headings a:hover, .contributionTypeTabs a.selected, .form-headings a.currentCrossLink{
 	background-color: #00458c;
 	color: #ffdd00;
 }
 
 
-#term-warning{
+
+/*For the message when a user does not check off agreeing to terms*/
+.warning{
 	color:red;
+	margin: 0;
+	padding: 0;
 }
 
 div#contribution-type-form div.inputs {
@@ -60,7 +105,6 @@ div#location_form {
 }
 
 #contribution-confirm-submit p{
-	font-size: 1em;
 	margin: 10px 0px 0px 0px;
 }
 

@@ -199,9 +199,9 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
         $acl->addResource('Contribution_Contribution');
         $acl->allow(array('super', 'admin', 'researcher', 'contributor'), 'Contribution_Contribution');
         if(get_option('contribution_simple')) {
-            $acl->allow(null, 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form'));            
+            $acl->allow(null, 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form', 'filetype'));            
         } else {
-            $acl->allow('guest', 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form'));
+            $acl->allow('guest', 'Contribution_Contribution', array('show', 'contribute', 'thankyou', 'my-contributions', 'type-form', 'filetype'));
         }
         
         $acl->allow(null, 'Contribution_Contribution', 'contribute');
@@ -540,6 +540,15 @@ class ContributionPlugin extends Omeka_Plugin_AbstractPlugin
                 }
                 $html .= "<p><strong>$publicMessage</strong></p>";
             }
+			
+			$contactMessage = '';
+			if($contributedItem->contact) {
+				$contactMessage = __("You may contact this contributor for information about this contribution.");
+			} else {
+				$contactMessage = __("You may not contact this contributor for information about this contribution");
+			}
+			$html .= "<p><strong>$contactMessage</strong></p>";
+			
             return $html;
         }
     }

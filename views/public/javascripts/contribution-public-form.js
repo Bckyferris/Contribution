@@ -17,18 +17,33 @@ function enableContributionTypeButtons(url) {
 		$("a").removeClass("selected");
 		el.addClass("selected");
 		
-		typeButtons.fadeTo("fast", 0.4);
+		typeButtons.fadeTo("fast", 0.3);
 		el.fadeTo("fast", 1.0);
+		
+		
+		$("#test").empty();
+		
+		var inputTexts = "{"
+		$("#contributorInformationForm :text").each(function(index) {
+			if((this).value)
+			{	
+				var pattern = new RegExp('(\\d+)');
+				var array = pattern.exec($(this).attr('name'));
+				var name = array[0];
 			
-        var typeId = el.attr('value');
-        typeFormDiv.empty();
+				inputTexts += '"' + name + '": "' + $(this).val() + '", ';
+			}
+		});
 		
-        jQuery.post(url, {contribution_type: typeId}, function(data) {
-            typeFormDiv.append(data);
-			
+		var typeId = el.attr('value'); 
+		inputTexts += '"contribution_type":' + typeId + "}";
 		
+	 	typeFormDiv.empty();
 		
-        });
+		var json = JSON.parse(inputTexts);
+		
+        jQuery.post(url, json , function(data) {
+            typeFormDiv.append(data);});
     });
 }
 

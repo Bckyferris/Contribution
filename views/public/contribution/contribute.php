@@ -6,10 +6,13 @@
  * @package Contribution
  */
 
+queue_js_url("http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js");
 queue_js_url("http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js");
 queue_js_file('contribution-public-form');
-queue_js_file('jquery.bxslider.min');
-queue_css_file('jquery.bxslider');
+queue_js_file('jquery.easing.1.3');
+queue_js_file('jquery.touchSwipe.min');
+queue_js_file('jquery.liquid-slider.min');
+queue_css_file('liquid-slider');
 
 $contributionPath = get_option('contribution_page_path');
 if(!$contributionPath) {
@@ -24,7 +27,10 @@ echo head($head);
 
 ?>
 
+
+    
 <script type="text/javascript">
+//Enable the "Type" buttons
 // <![CDATA[
 jQuery(document).ready(function() {            
 enableContributionTypeButtons(<?php echo js_escape(url($contributionPath.'/type-form')); ?>);
@@ -38,26 +44,26 @@ enableContributionTypeButtons(<?php echo js_escape(url($contributionPath.'/type-
 
 <?php echo flash(); ?>
     
-    <h2><?php //echo $head['title']; ?>
-    What type of item would you like to contribute?
-    </h2>
+    <h2>What type of item would you like to contribute?</h2>
       
         <?php $options = get_table_options('ContributionType' ); ?>
-        <?php array_shift($options); ?>
+        
         <ul id = "section-nav" class="contributionTypeTabs">
-        <?php 
-		$tabs = array();
-		foreach ($options as $id=>$option): ?>
-			<li>
-            	 <a href='' class='type-option' value='<?php echo $id+1; ?>'><?php echo $option; ?></a>      </li>
-		 <?php endforeach; ?>
+        	<?php 
+			$tabs = array();
+			foreach ($options as $id=>$option): ?>
+				<li class="contributionTypeTab">
+            		<a href='' class='type-option' value='<?php echo $id; ?>'><?php echo $option; ?></a>      		
+                </li>
+		     <?php endforeach; ?>
 		</ul>
 		
-	
-       <div id='type-form'>                   
-       </div> <!-- Closes type-form div (set with AJAX) -->
-    
-                    
-                
+
+        <div id='type-form'>                   
+        </div> <!-- Closes type-form div (set with AJAX, see type-form.php) -->
+   
+        
+</div><!-- Ends primary div -->
+
                 
 <?php echo foot();

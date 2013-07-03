@@ -18,7 +18,9 @@
                 <td><?php echo $this->formCheckbox("contribution_public[{$contribItem->id}]", null, array('checked'=>$contribItem->public) ); ?>
                 </td>
                 <td><?php echo $this->formCheckbox("contribution_anonymous[{$contribItem->id}]", null, array('checked'=>$contribItem->anonymous) ); ?>
-                </td>                
+                </td>     
+                <td><?php echo $this->formCheckbox("contribution_contact[{$contribItem->id}]", null, array('checked'=>$contribItem->contact) ); ?>
+                </td>           
                 <td><?php echo link_to($item, 'show', metadata($item, array('Dublin Core', 'Title'))); ?></td>
                 <td><?php echo metadata($item, 'added'); ?></td>
             

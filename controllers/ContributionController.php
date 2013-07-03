@@ -37,7 +37,8 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
                 }
                 $contribItem->public = $value;
                 $contribItem->anonymous = $_POST['contribution_anonymous'][$id];
-                
+				$contribItem->contact = $_POST['contribution_contact'][$id];
+				 
                 if($contribItem->save()) {
                     $this->_helper->flashMessenger( __('Your contributions have been updated.'), 'success');
                 } else {
@@ -94,12 +95,13 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
     public function typeFormAction()
     {
         $this->_setupContributeSubmit($_POST['contribution_type']);
+		
     }
     
     /**
-     * Displays terms of service for contribution.
+     * Displays file types that are acceptable for contribution.
      */
-    public function termsAction()
+    public function filetypeAction()
     {
     }
     
@@ -128,6 +130,21 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         debug($type->id);
         $this->view->type = $type;
         debug($this->view->type->id);
+		
+		//setup profile stuff, if needed
+        $profileTypeId = get_option('contribution_user_profile_type');
+        if(plugin_is_active('UserProfiles') && $profileTypeId && current_user()) {
+            $this->view->addHelperPath(USER_PROFILES_DIR . '/helpers', 'UserProfiles_View_Helper_');
+            $profileType = $this->_helper->db->getTable('UserProfilesType')->find($profileTypeId);
+            $this->view->profileType = $profileType;
+            
+            $profile = $this->_helper->db->getTable('UserProfilesProfile')->findByUserIdAndTypeId(current_user()->id, $profileTypeId);
+            if(!$profile) {
+                $profile = new UserProfilesProfile();
+                $profile->type_id = $profileTypeId;
+            }
+            $this->view->profile = $profile;            
+        }
     }
     
     /**
@@ -215,6 +232,9 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
                 return false;
             }
             $this->_addElementTextsToItem($item, $post['Elements']);
+			
+			
+			
             // Allow plugins to deal with the inputs they may have added to the form.
             fire_plugin_hook('contribution_save_form', array('contributionType'=>$contributionType,'item'=>$item, 'post'=>$post));
             $item->save();
@@ -226,6 +246,27 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         return false;
     }
     
+	 protected function _processUserProfile($post)
+    {
+        $profileTypeId = get_option('contribution_user_profile_type');
+        if($profileTypeId) {
+            $user = current_user();
+            $profile = $this->_helper->db->getTable('UserProfilesProfile')->findByUserIdAndTypeId($user->id, $profileTypeId);
+            if(!$profile) {
+                $profile = new UserProfilesProfile();
+                $profile->setOwner($user);
+                $profile->type_id = $profileTypeId;
+                $profile->public = 0;
+                $profile->setRelationData(array('subject_id'=>$user->id));
+            }    
+        }
+        $profile->setPostData($post);
+        $this->_profile = $profile;
+        if(!$profile->save(false)) {
+            return false;
+        }
+        return true;
+    }
     
     /**
      * Deals with files specified on the contribution form.
@@ -264,12 +305,7 @@ class Contribution_ContributionController extends Omeka_Controller_AbstractActio
         $linkage->item_id = $item->id;
         $linkage->public = $post['contribution-public'];
         $linkage->anonymous = $post['contribution-anonymous'];
-        //dig up the Element data from the post, looking for the element id for 'Name'
-        //check if it is empty, and if so make anonymous regardless of above
-        if(false) {
-            $linkage->anonymous = true;
-        }
-        
+        $linkage->contact = $post['contact-ok'];
         $linkage->save();
     }
     

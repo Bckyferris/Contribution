@@ -50,10 +50,12 @@ echo flash();
         <?php foreach(loop('contribution_contributed_items') as $contribItem):?>
         
         <?php $item = $contribItem->Item; ?>
-        <?php $contributor = $contribItem->Contributor; ?>
+        <?php $contributor = $contribItem->Contributor;  ?>
+        
         <?php 
             if($contributor->id) {
                 $contributorUrl = url('contribution/contributors/show/id/' . $contributor->id);
+				
             }
         
         ?>
@@ -63,7 +65,7 @@ echo flash();
                  
                  <?php if(!is_null($contributor->id)): ?>
                  <?php if($contribItem->anonymous && (is_allowed('Contribution_Items', 'view-anonymous') || $contributor->id == current_user()->id)): ?>
-                 <span>(<?php echo __('Anonymous'); ?>)</span>
+                 <span>(<?php //echo __('Anonymous'); ?>)</span>
                  <?php endif; ?>
                  <a href='<?php echo $contributorUrl; ?>'>Info and contributions</a>
                  <?php endif; ?>             
