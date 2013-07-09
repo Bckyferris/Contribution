@@ -205,6 +205,7 @@ $(document).ready(function(){
 			hoverArrows: false,
 			dynamicTabs: false,
 			crossLinks: true,
+			preloader: true
 			
           });
     
@@ -280,7 +281,7 @@ var typeArray = new Array();
 
 $('#contributed_file').change(function(event) {
 	var fileName = $('#contributed_file').val();
-	var extension = fileName.split('.').pop();
+	var extension = fileName.split('.').pop().toLowerCase();
 	if (jQuery.inArray(extension, typeArray) < 0){
 		event.preventDefault();
 		$('#file-warning').remove();
