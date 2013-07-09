@@ -45,6 +45,11 @@
 	
 }
 
+.contributionTypeTab {
+	margin-top: 20px;
+	white-space: nowrap;
+}
+
 .form-headings{
 	border-top: 1px dotted #00458c;
 	border-bottom: 1px dotted #00458c;
@@ -79,6 +84,7 @@
 	border-radius:14px;
 	border:1px solid #ffae00;
 	color:#00468c;
+	white-space: nowrap;
 }
 
 .contributionTypeTabs a:hover, .form-headings a:hover, .contributionTypeTabs a.selected, .form-headings a.currentCrossLink{
@@ -124,4 +130,22 @@ p#contribution-userprofile-visibility {
 
 div.contribution-userprofile.exists {
 	display: none;
+}
+
+@media screen and (max-width: 40em){
+	
+	
+	
+	.form-headings li{
+		display: none;
+	}
+	
+	.form-headings a{
+		display: block;
+	}
+	
+	li.arrow{
+		display:none;	
+		margin: 0;
+}
 }
